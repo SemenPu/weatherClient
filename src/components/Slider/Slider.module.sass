@@ -1,0 +1,77 @@
+$main_white: #f1f2f6
+// $card_bg: rgba(52, 73, 94, 0.624)
+$card_bg: rgba(9, 133, 227, 0.3)
+$arrow_bg: rgba(255, 255, 255, 0.5)
+$arrow_bg_hover: rgba(255, 255, 255, 0.75)
+.contaner__slider
+    width: 100%
+    height: calc( 100% - 3rem - 140px )
+    display: flex
+.subcontainer__slider
+    display: flex
+    flex-wrap: nowrap
+    align-items: center
+    align-self: center
+    justify-content: space-between
+.weather__slider__container
+    height: 80%
+    width: 1180px
+    overflow-x: hidden
+    // background-color: #edfcfd
+.slider
+    width: 2360px
+    height: 300px
+    display: flex
+    transition: transform .4s
+.slider__weather__card
+    width: 285px
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: space-evenly
+    background-color: $card_bg
+    box-sizing: border-box
+    // border: 2px solid $main_white
+    border-radius: 6px
+    margin: 0 5px
+    &:last-of-type
+        margin-right: 0
+.weather__icon
+    position: absolute
+    top: 0px
+    left: 0px
+.slider__arrow
+    width: 70px
+    height: 45px
+    border-radius: 7px
+    background-color: $arrow_bg
+    background-image: url('../../img/expand-arrow-small2.png')
+    background-position: center
+    background-repeat: no-repeat
+    transition: background .3s
+    &:hover
+        cursor: pointer
+        background-color: $arrow_bg_hover
+.slider__arrow_right
+    transform: rotate(-90deg)
+.slider__arrow_left
+    transform: rotate(90deg)
+.weather__card_time
+    font-size: 2rem
+.weather__card_real_temp
+    font-size: 1rem
+.weather__card_row
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+.weather__card_sky
+    .card__row_second
+        text-transform: capitalize
+.card__row_first
+    width: 50%
+    text-align: right
+.card__row_second
+    width: 50%
+    text-align: center

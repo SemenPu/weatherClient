@@ -1,0 +1,21 @@
+// $border_color: linear-gradient(90deg, #ecf0f1 0%, rgba(85,239,196,1) 50%, #ecf0f1 100%)
+$border_color: linear-gradient(133deg, rgba(236,240,241,0.14889705882352944) 1%, rgba(241,242,246,1) 25%, rgba(241,242,246,1) 75%, rgba(236,240,241,0.14609593837535018) 99%)
+.search_input
+    width: 32vw
+    height: 40px
+    font-size: 1.4rem
+    outline: none
+    background-color: transparent
+    border: 2px solid transparent
+    border-left: none
+    border-right: none
+    border-image: $border_color
+    border-image-slice: 1
+    text-align: center
+    color: #f1f2f6
+    &:focus
+        border: 3px solid transparent
+        border-left: none
+        border-right: none
+        border-image: $border_color
+        border-image-slice: 1

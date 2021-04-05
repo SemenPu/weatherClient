@@ -1,0 +1,36 @@
+$bg_color: linear-gradient(to right, #9EEFE1 0%, #4830F0 51%, #9EEFE1 100%)
+//$bg_colod: #74b9ff
+#search_button
+    position: relative
+    width: 100px
+    height: 35px
+    margin: 0 -120px 0 10px
+    backdrop-filter: blur(4px)
+    padding: 0
+    background-color: transparent
+    border: 2px solid #f1f2f6
+    text-transform: uppercase
+    text-align: center
+    font-weight: 600
+    font-size: 1rem
+    line-height: 33px
+    text-decoration: none
+    color: #f1f2f6
+    transition: .4s
+    &::after
+        content: ''
+        position: absolute
+        top: -2px
+        left: -2px
+        right: 0
+        bottom: 0
+        width: 100px
+        height: 35px
+        box-sizing: border-box
+        margin: auto
+        border: 2px solid #f1f2f6
+        transition: .4s
+    &:hover:after
+        cursor: pointer
+        width: calc(100% - 17px)
+        height: calc(100% + 23px)
