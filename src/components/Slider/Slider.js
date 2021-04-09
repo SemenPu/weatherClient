@@ -6,6 +6,7 @@ import styles from './Slider.module.sass'
 export const Slider = ({ data }) => {
     const [elemWidth, setElemWidth] = useState(0) // величина сдвига = calc( width + margin) - const
     const [count, setCount] = useState(1) // общее количество элементов слайдера
+    const [showCount, setShowCount] = useState(1) // видимое количество элементов слайдера
     const [offset, setOffset] = useState(0) // величина сдвига в пикселях(изменяемая)
     const [slider, setSlider] = useState(false) // ДОМ-элемент слайдера
 
@@ -18,23 +19,45 @@ export const Slider = ({ data }) => {
     }, [data])
 
     useEffect(() => {
-        if (slider) sliderHanlder('none')
+        if (slider) {
+            window.addEventListener('resize', resizeHandler)
+            sliderHanlder('none')
+        }
+        return () => {
+            window.removeEventListener('resize', resizeHandler)
+        }
         // eslint-disable-next-line
     }, [slider])
 
     function createSliderParams() {  // обработчик величины (px) прокрутки
-        const elems = document.getElementsByClassName('weather__card')
-        if (elems.length < 1) return
-        const width = elems[0].offsetWidth
-        const marg = Number.parseInt(getComputedStyle(elems[0]).marginRight)
-        setElemWidth(Number(width) + marg * 2)
-        setCount(elems.length)
+        const { count, visibleItems, width, marg } = sliderSizeData()
+        setElemWidth(width + marg * 2)
+        setShowCount(visibleItems)
+        setCount(count)
         setSlider(document.getElementById('weather__slider'))
     }
-
+    function resizeHandler() {
+        const { _, visibleItems, width, marg } = sliderSizeData()
+        setElemWidth(width + marg * 2)
+        setShowCount(visibleItems)
+        setOffset(-elemWidth)
+        slider.style.transform = `translateX(-${width + marg * 2}px)`
+        console.log('resized')
+    }
+    function sliderSizeData() {
+        const elems = document.getElementsByClassName('weather__card')
+        if (elems.length < 1) return
+        const elemsShowWidth = Number.parseInt(getComputedStyle(document.getElementById('slider_count_anchor')).width)
+        const width = Number(elems[0].offsetWidth)
+        const marg = Number.parseInt(getComputedStyle(elems[0]).marginRight)
+        const count = elems.length
+        const visibleItems = Math.round(elemsShowWidth / (width + marg * 2))
+        // общее кол-во эл-тов, видимое кол-во эл-тов, ширина без внешних отступов, внешний отступ
+        return { count, visibleItems, width, marg }
+    }
     function sliderHanlder(direction) { // обработчик прокрутки в стороны
         if (direction === 'right') {
-            const offsetEnd = -elemWidth * (count - 4) // count * 4, где 4 это число отображаемых эл-тов на странице, для корректного сдвига
+            const offsetEnd = -elemWidth * (count - showCount) // расчет сдвига. count - общее число эл-тов, showCount - число элементов показанных при загрузке
             if (offset <= offsetEnd) return
             setOffset(offset => {
                 const computed = offset - elemWidth
@@ -60,7 +83,7 @@ export const Slider = ({ data }) => {
         <div className={styles.contaner__slider}>
             <div className={styles.subcontainer__slider}>
                 <div className={`${styles.slider__arrow} ${styles.slider__arrow_left}`} onClick={() => sliderHanlder('left')} />
-                <div className={styles.weather__slider__container}>
+                <div className={styles.weather__slider__container} id='slider_count_anchor'>
                     <div className={styles.slider} id='weather__slider'>
                         {data ?
                             data.map((day, index) => (

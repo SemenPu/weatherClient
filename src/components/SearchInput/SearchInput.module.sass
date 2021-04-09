@@ -19,3 +19,25 @@ $border_color: linear-gradient(133deg, rgba(236,240,241,0.14889705882352944) 1%,
         border-right: none
         border-image: $border_color
         border-image-slice: 1
+
+@media screen and ( max-width: 770px )
+    .search_input
+        width: 47vw
+@media screen and ( max-width: 620px )
+    .search_input
+        height: 30px
+@media screen and ( max-width: 465px )
+    .search_input
+        height: 27px
+        width: 45vw
+        border: 1px solid transparent
+        border-left: none
+        border-right: none
+        border-image: $border_color
+        border-image-slice: 1
+        &:focus
+            border: 1px solid transparent
+            border-left: none
+            border-right: none
+            border-image: $border_color
+            border-image-slice: 1

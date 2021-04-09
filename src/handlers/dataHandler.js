@@ -16,14 +16,14 @@ export async function getData(url) {
 export function dataObjectConstructor(data, sunrise, sunset) {
     const handledData = {}
     let currentDay = getDayFromDate(data[0].dt)
-    handledData[currentDay] = []
+    handledData[`day_${currentDay}`] = []
     let k = 1
     for (let item of data) {
         const calcDay = getDayFromDate(item.dt)
         if (calcDay !== currentDay) {
             currentDay = calcDay
             k++
-            if (k < 6) handledData[currentDay] = []
+            if (k < 6) handledData[`day_${currentDay}`] = []
         }
         if (k < 6) {
             const handledItem = {
@@ -46,11 +46,9 @@ export function dataObjectConstructor(data, sunrise, sunset) {
                 windDirection: item.wind.deg,
                 directionTitle: createWindDirection(item)
             }
-
-            handledData[currentDay].push(handledItem)
+            handledData[`day_${currentDay}`].push(handledItem)
         }
     }
-    // console.log(handledData)
     return handledData
 }
 
@@ -72,10 +70,13 @@ export function cityObjectConstructor(data) {
     return cityData
 }
 
-export function createCurrentWeek(arr) {
+export function createCurrentWeek(data) {
     const currentWeek = []
-    arr.forEach(day => {
-        currentWeek.push(dayNames[Number(day)])
+    const weekNumbs = Object.keys(data)
+    weekNumbs.forEach(day => {
+        const numb = day[day.length - 1]
+        const k = Number(numb)
+        currentWeek.push({ dayName: dayNames[k], dayNumber: Number(numb) })
     })
     return currentWeek
 }

@@ -6,8 +6,6 @@ import styles from './PopupData.module.sass'
 export const PopupData = ({ country, lat, lon, timezone, show, sunrise, sunset, onclick, population }) => {
 
     const [utc, setUtc] = useState('')
-    const [sunriseObj, setSunriseObj] = useState('')
-    const [sunsetObj, setSunsetObj] = useState('')
 
     useEffect(() => {
         if (!utc) {
@@ -17,23 +15,6 @@ export const PopupData = ({ country, lat, lon, timezone, show, sunrise, sunset, 
             }
         }
     }, [utc, timezone])
-
-    useEffect(() => {
-        if (!sunrise) return
-        if (sunriseObj) return
-        const rawSunrise = new Date(sunrise)
-        const sunriseD = `${rawSunrise.getHours()}:${rawSunrise.getMinutes()}`
-        setSunriseObj(sunriseD)
-    }, [sunrise, sunriseObj])
-
-    useEffect(() => {
-        if (!sunset) return
-        if (sunsetObj) return
-        const rawSunset = new Date(sunset)
-        const sunsetD = `${rawSunset.getHours()}:${rawSunset.getMinutes()}`
-        setSunsetObj(sunsetD)
-    }, [sunset, sunsetObj])
-
     return (
         show &&
         <div className={styles.popup__block}>
@@ -49,11 +30,11 @@ export const PopupData = ({ country, lat, lon, timezone, show, sunrise, sunset, 
                 </div>
                 <div className={styles.popup__addInfo}>
                     <span>Рассвет:</span>
-                    <span>{sunriseObj}</span>
+                    <span>{sunrise}</span>
                 </div>
                 <div className={styles.popup__addInfo}>
                     <span>Закат:</span>
-                    <span>{sunsetObj}</span>
+                    <span>{sunset}</span>
                 </div>
                 {/* <div className={styles.popup__addInfo}>
                         <span>{lat}</span>
