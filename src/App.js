@@ -25,19 +25,29 @@ function App() {
   }, [])
 
   function successLocation(locObj) {
-    setRequest(true, locObj.coords.latitude, locObj.coords.longitude)
+    sendCoordRequest(locObj.coords.latitude, locObj.coords.longitude)
   }
   function errorLocation(desc) {
     console.log(desc)
   }
-
-  async function setRequest(coordGet = false, latitude = null, longitude = null) {
+  async function sendNameRequest(caller) {
+    console.log(caller)
     if (loading === true) return
-    const url = coordGet ? `/data/getCoordData?lat=${latitude}&lon=${longitude}` : `/data/getData?cityName=${value}`
+    const url = `/data/getData?cityName=${value}`
+    if (value.length < 4) return console.log('Не введли город')
     setLoading(true)
+    if (fetching) return
+    await loadingDataHandler(url)
+  }
+  async function sendCoordRequest(latitude = null, longitude = null) {
+    if (loading === true) return
+    const url = `/data/getCoordData?lat=${latitude}&lon=${longitude}`
+    setLoading(true)
+    if (fetching) return
+    await loadingDataHandler(url)
+  }
+  async function loadingDataHandler(url) {
     try {
-      if (value.length < 3 && !coordGet) return
-      if (fetching) return
       setFetching(true)
       const data = await getData(url)
       const daysData = dataObjectConstructor(data.list, data.city.sunrise, data.city.sunset)
@@ -53,7 +63,6 @@ function App() {
     setLoading(false)
     setFetching(false)
   }
-
   function formValueHandler(val) {
     if (val[val.length - 1] === ' ') return setValue(val)
     if (val[val.length - 1] === '-') return setValue(val)
@@ -67,12 +76,13 @@ function App() {
 
   return (
     <React.Fragment>
+      <div className='all__hieght_blur' />
       <header>
         <div className='city_search'>
           <label htmlFor='searchInput'>Введите название города</label>
-          <form onSubmit={e => { e.preventDefault(); setRequest() }} >
+          <form onSubmit={e => { e.preventDefault(); }} >
             <SearchInput onType={e => formValueHandler(e.target.value)} val={value} inputId='searchInput' />
-            <SearchButton sendRequest={() => setRequest()} />
+            <SearchButton sendRequest={() => sendNameRequest('sb')} />
           </form>
         </div>
       </header>

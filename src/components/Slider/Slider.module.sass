@@ -3,10 +3,16 @@ $main_white: #f1f2f6
 $card_bg: rgba(9, 133, 227, 0.3)
 $arrow_bg: rgba(255, 255, 255, 0.5)
 $arrow_bg_hover: rgba(255, 255, 255, 0.75)
-.contaner__slider
+.container__slider
     width: 100%
     height: calc( 100% - 3rem - 140px )
     display: flex
+.test_abs
+    position: absolute
+    top: 0
+    left: 20px
+    font-size: 1rem
+    color: white
 .subcontainer__slider
     display: flex
     flex-wrap: nowrap
@@ -15,16 +21,17 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     justify-content: space-between
 .weather__slider__container
     height: 80%
-    width: 1180px
+    width: 1325px
+    box-sizing: border-box
     overflow-x: hidden
     // background-color: #edfcfd
 .slider
-    width: 2360px
+    width: 2650px
     height: 300px
     display: flex
     transition: transform .4s
 .slider__weather__card
-    width: 285px
+    width: 320px
     height: 100%
     display: flex
     flex-direction: column
@@ -32,7 +39,6 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     justify-content: space-evenly
     background-color: $card_bg
     box-sizing: border-box
-    // border: 2px solid $main_white
     border-radius: 6px
     margin: 0 5px
     &:last-of-type
@@ -76,18 +82,14 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     width: 50%
     text-align: center
 
-@media screen and ( max-width: 1380px )
-    .contaner__slider
-        width: 100%
+@media screen and ( max-width: 1590px )
+    .container__slider
         height: calc( 100% - 3rem - 140px )
+        justify-content: center
     .weather__slider__container
-        width: 1065px
-    .slider
-        height: 300px
+        width: 1185px
     .slider__weather__card
-        width: 257px
-        border-radius: 5px
-        margin: 0 5px
+        width: 285px
     .slider__arrow
         width: 60px
         height: 40px
@@ -95,42 +97,66 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
         font-size: 2rem
     .weather__card_real_temp
         font-size: 1rem
+@media screen and ( max-width: 1380px )
+    .container__slider
+        height: calc( 100% - 3rem - 140px )
+    .weather__slider__container
+        width: 1065px
+    .slider
+        height: 300px
+    .slider__weather__card
+        width: 255px
+        border-radius: 5px
+        margin: 0 5px
+    .slider__arrow
+        width: 60px
+        height: 40px
+    .slider__arrow_left
+        margin-left: -2px
+    .weather__card_time
+        font-size: 2rem
+    .weather__card_real_temp
+        font-size: 1rem
 @media screen and ( max-width: 1281px )
-    .contaner__slider
+    .container__slider
         width: 100%
         height: calc( 100% - 3rem - 140px )
     .weather__slider__container
-        width: 890px
+        width: 905px
     .slider
         width: 2360px
         height: 280px
     .slider__weather__card
-        width: 213px
+        width: 215px
         border-radius: 5px
         margin: 0 5px
     .slider__arrow
-        width: 55px
-        height: 35px
+        width: 52px
+        height: 33px
+    .slider__arrow_left
+        margin-left: -2px
     .weather__card_time
         font-size: 1.9rem
     .weather__card_real_temp
         font-size: 1rem
 @media screen and ( max-width: 1050px )
-    .contaner__slider
+    .container__slider
         width: 100%
         height: calc( 100% - 3rem - 140px )
     .weather__slider__container
-        width: 760px
+        width: 755px
     .slider
         width: 2360px
         height: 260px
     .slider__weather__card
-        width: 237px
+        width: 240px
         border-radius: 5px
-        margin: 0 7px
+        margin: 0 5px
     .slider__arrow
         width: 55px
         height: 35px
+    .slider__arrow_left
+        margin-left: 3px
     .weather__card_time
         font-size: 1.9rem
     .weather__card_real_temp
@@ -140,21 +166,23 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     .card__row_second
         font-size: 1.1rem
 @media screen and ( max-width: 905px )
-    .contaner__slider
+    .container__slider
         width: 100%
         height: calc( 100% - 3rem - 140px )
     .weather__slider__container
-        width: 563px
+        width: 636px
     .slider
         width: 2360px
         height: 280px
     .slider__weather__card
-        width: 207px
+        width: 205px
         border-radius: 5px
         margin: 0 3px
     .slider__arrow
         width: 55px
         height: 35px
+    .slider__arrow_left
+        margin-left: 2px
     .weather__card_time
         font-size: 1.9rem
     .weather__card_real_temp
@@ -164,20 +192,22 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     .card__row_second
         font-size: 1.2rem
 @media screen and ( max-width: 770px )
-    .contaner__slider
+    .container__slider
         height: calc( 100% - 3rem - 200px )
     .weather__slider__container
-        width: 563px
+        width: 565px
     .slider
         width: 2360px
         height: 300px
     .slider__weather__card
-        width: 268px
+        width: 270px
         border-radius: 5px
-        margin: 0 6px
+        margin: 0 5px
     .slider__arrow
         width: 55px
         height: 35px
+    .slider__arrow_left
+        margin-left: -2px
     .weather__card_time
         font-size: 1.9rem
     .weather__card_real_temp
@@ -187,7 +217,7 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     .card__row_second
         font-size: 1.2rem
 @media screen and ( max-width: 690px )
-    .contaner__slider
+    .container__slider
         height: calc( 100% - 3rem - 200px )
     .weather__slider__container
         width: 483px
@@ -210,19 +240,20 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     .card__row_second
         font-size: 1.2rem
 @media screen and ( max-width: 620px )
-    .contaner__slider
+    .container__slider
         height: calc( 100% - 3rem - 100px )
     .weather__slider__container
-        width: 400px
+        width: 405px
     .slider
-        width: 2360px
         height: 270px
     .slider__weather__card
-        width: 194px
+        width: 196px
         margin: 0 3px
     .slider__arrow
         width: 55px
         height: 35px
+    .slider__arrow_left
+        margin-left: -5px
     .weather__card_time
         font-size: 1.9rem
     .weather__card_real_temp
@@ -232,21 +263,24 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     .card__row_second
         font-size: 1.2rem
 @media screen and ( max-width: 525px )
-    .contaner__slider
+    .container__slider
         height: calc( 100% - 3rem - 133px )
     .weather__slider__container
-        width: 358px
+        width: 365px
+    .subcontainer__slider
+        justify-content: flex-start
     .slider
-        width: 2360px
         height: 230px
     .slider__weather__card
-        width: 173px
+        width: 175px
         margin: 0 3px
     .slider__arrow
         width: 45px
         height: 25px
         background-size: 60%
         border-radius: 4px
+    .slider__arrow_left
+        margin-left: -6px
     .weather__card_time
         font-size: 1.78rem
     .weather__card_real_temp
@@ -256,12 +290,11 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
     .card__row_second
         font-size: 1.2rem
 @media screen and ( max-width: 465px )
-    .contaner__slider
+    .container__slider
         height: calc( 100% - 3rem - 200px )
     .weather__slider__container
         width: 275px
     .slider
-        width: 2360px
         height: 280px
     .slider__weather__card
         width: 260px
@@ -271,6 +304,8 @@ $arrow_bg_hover: rgba(255, 255, 255, 0.75)
         height: 25px
         background-size: 60%
         border-radius: 4px
+    .slider__arrow_left
+        margin-left: -2px
     .weather__card_time
         font-size: 1.78rem
     .weather__card_real_temp
